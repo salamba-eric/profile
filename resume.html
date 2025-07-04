@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Eric Salamba - Resume</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <link href="resume.css" rel="stylesheet">
+</head>
+<body class="transition-colors duration-500 bg-gray-50 text-black" id="body">
+  <div class="max-w-4xl mx-auto p-4 sm:p-6">
+    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-3">
+      <div>
+        <h1 class="text-3xl sm:text-4xl font-bold text-blue-600">Eric Salamba</h1>
+        <p class="text-lg">Computer Scientist</p>
+        <p class="text-sm text-gray-600" id="contact">Kitengela, Kenya (Remote) · +254 724 530 004 · ericsalamba@gmail.com</p>
+      </div>
+      <div class="flex gap-2 mt-2 sm:mt-0">
+        <button onclick="downloadFile('pdf')" class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded text-sm">PDF</button>
+        <button onclick="downloadFile('docx')" class="bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded text-sm">Word</button>
+        <button onclick="toggleDarkMode()" class="border px-3 py-1 rounded text-sm">Toggle Mode</button>
+      </div>
+    </div>
+
+    <section data-aos="fade-up" class="section-card">
+      <h2 class="section-title">Professional Summary</h2>
+      <p>Full stack developer with a strong foundation in scalable applications. Passionate about algorithm design and building elegant, efficient solutions.</p>
+    </section>
+
+    <section data-aos="fade-up" class="section-card">
+      <h2 class="section-title">Skills</h2>
+      <p><strong>Languages:</strong> Python, JavaScript/TypeScript, SQL, PHP</p>
+      <p><strong>Frameworks:</strong> React.js, Node.js, Express, Flask, Django</p>
+      <p><strong>Tools:</strong> Git, Docker, MongoDB, Postman, PostgreSQL, MySQL, Canva, Krita, Blender</p>
+      <p><strong>Soft Skills:</strong> Self-motivated, Critical thinker, Effective communicator, Detail-oriented, Adaptable</p>
+    </section>
+
+    <section data-aos="fade-up" class="section-card">
+      <h2 class="section-title">Work Experience</h2>
+      <h3 class="text-lg font-bold">Attachee</h3>
+      <p class="italic text-sm">Senate, Kenya — May to August 2024</p>
+      <ul class="list-disc list-inside ml-4 mt-2">
+        <li>Provided IT support</li>
+        <li>Worked on frontend for a project management system</li>
+        <li>Implemented UI improvements</li>
+      </ul>
+    </section>
+
+    <section data-aos="fade-up" class="section-card">
+      <h2 class="section-title">Education</h2>
+      <div class="mb-4">
+        <h3 class="text-lg font-bold">Jomo Kenyatta University of Agriculture and Technology</h3>
+        <p class="italic text-sm">BSc Computer Science | 2021 – 2025</p>
+      </div>
+      <div>
+        <h3 class="text-lg font-bold">Alliance High School</h3>
+        <p class="italic text-sm">Graduated 2021 — A- Grade</p>
+        <p>Science and Robotics Club Member (4 years)</p>
+      </div>
+    </section>
+
+    <section data-aos="fade-up" class="section-card">
+      <h2 class="section-title">Projects</h2>
+      <ul class="list-disc list-inside ml-4 space-y-2">
+        <li><strong>Project Management App:</strong> React + Express + MySQL web app with user auth and dashboards.</li>
+        <li><strong>Shopping Website:</strong> E-commerce site (React + PHP + MySQL, later MongoDB) with CMS and filtering.</li>
+        <li><strong>Final Year Project:</strong> Audio transcription and NLP data extraction using Whisper and MongoDB.</li>
+        <li><strong>Games (Python):</strong> Built Checkers, Chess, and Ping Pong games from scratch.</li>
+      </ul>
+    </section>
+
+    <section id="certifications" data-aos="fade-up" class="section-card">
+      <h2 class="section-title">Certifications</h2>
+      <ul class="list-disc list-inside ml-4">
+        <li>Advanced Python – IST, Nairobi</li>
+        <li>Azure Fundamentals (AZ-900) – Microsoft Certified</li>
+      </ul>
+    </section>
+  </div>
+
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+  <script src="resume.js"></script>
+</body>
+</html>

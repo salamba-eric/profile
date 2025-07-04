@@ -1,0 +1,162 @@
+<html>
+  <head>
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="" />
+    <link
+      rel="stylesheet"
+      as="style"
+      onload="this.rel='stylesheet'"
+      href="https://fonts.googleapis.com/css2?display=swap&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900&amp;family=Space+Grotesk%3Awght%40400%3B500%3B700"
+    />
+
+    <title>Loading Resume...</title>
+    <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
+
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  </head>
+  <body>
+    <div class="relative flex size-full min-h-screen flex-col bg-[#1a171c] dark group/design-root overflow-x-hidden" style='font-family: "Space Grotesk", "Noto Sans", sans-serif;'>
+      <div class="layout-container flex h-full grow flex-col">
+        <header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#38313a] px-10 py-3">
+          <div class="flex items-center gap-4 text-white">
+            <div class="size-4">
+              <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M24 4H42V17.3333V30.6667H24V44H6V30.6667V17.3333H24V4Z" fill="currentColor"></path>
+              </svg>
+            </div>
+            <h2 id="name" class="text-white text-lg font-bold leading-tight tracking-[-0.015em]">Anonymous</h2>
+          </div>
+            <div class="flex gap-2">
+              <div class="relative inline-block">
+                <button id="download-btn"
+                  class="flex items-center justify-center h-10 px-4 rounded-full bg-[#a07eae] text-white text-sm font-bold">
+                  <span class="truncate">Download Resume</span>
+                </button>
+                <div class="absolute right-0 top-full mt-2 w-48 bg-[#36343d] text-black rounded-lg shadow-lg hidden p-2" id="download-menu">
+                  <div onclick="downloadPdf()" class="block px-4 py-2 rounded-md hover:bg-[#787878] cursor-pointer">Download as PDF</div>
+                  <div onclick="downloadDocx()" class="block px-4 py-2 rounded-md hover:bg-[#787878] cursor-pointer">Download as DOCX</div>
+                </div>
+                <script type="module">
+                  import { Document, Packer, Paragraph, HeadingLevel } from "https://cdn.jsdelivr.net/npm/docx@7.5.0/+esm";
+
+                  const resumeData = {
+                    name: document.getElementById("name").textContent,
+                    "job title": document.getElementById("job-title").textContent,
+                    description: document.getElementById("summary").textContent
+                  };
+
+                  document.getElementById("download-btn").addEventListener("click", function () {
+                    const menu = document.getElementById("download-menu");
+                    menu.classList.toggle("hidden");
+                  });
+
+                  document.addEventListener("click", function (event) {
+                    const downloadBtn = document.getElementById("download-btn");
+                    const menu = document.getElementById("download-menu");
+                    if (!downloadBtn.contains(event.target) && !menu.contains(event.target)) {
+                      menu.classList.add("hidden");
+                    }
+                  });
+
+                  window.downloadPdf = function () {
+                    const resumeContent = document.querySelector(".layout-content-container");
+                    const opt = {
+                      margin: 0.5,
+                      filename: `${resumeData.name.replace(/\s+/g, "_")}_resume.pdf`,
+                      image: { type: "jpeg", quality: 0.98 },
+                      html2canvas: { scale: 2 },
+                      jsPDF: { unit: "in", format: "letter", orientation: "portrait" }
+                    };
+                    html2pdf().set(opt).from(resumeContent).save();
+                  };
+
+                  window.downloadDocx = function () {
+                    const link = document.createElement("a");
+                    link.href = "Resume.docx"; // update this path if needed
+                    link.download = "Clio_Resume.docx";
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                  };
+
+                    Packer.toBlob(doc).then(blob => {
+                      saveAs(blob, `${resumeData.name.replace(/\s+/g, "_")}_resume.docx`);
+                    });
+                </script>
+
+              </div>
+              <img
+                    src="./image.jpg"
+                    onerror="this.onerror=null;this.src='https://lh3.googleusercontent.com/aida-public/AB6AXuDFM8P3aaJhXhVRcw88id8o8JkNHhwat8qHYVe5L_MwpuvZiPEsJKWrLeSGiBESh77PyNT39Xpzzbl8xlnajL3YvNuL0YnBcXqI3-DGmE5vWPDA-V_8ywsuJgBK15p6Yyr1IVuEi1z2i0MSyL4mXTcdDwDcr11JLcd9h7UcbbPuzqM8H48_3l0IsSEfFSVcELpgQzEMfC0d-MiTJtJQFNCI5SnwfZ5k4VcWebgSamYtULor0Pf2J6gdkJvwIicVl0dXi1dKkG66oSI';"
+                    alt="Profile Image"
+                    class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10"
+                  />
+            </div>
+          </div>
+        </header>
+        <div class="px-40 flex flex-1 justify-center py-5">
+          <div class="layout-content-container flex flex-col max-w-[960px] flex-1">
+            <div class="flex p-4 @container">
+              <div class="flex w-full flex-col gap-4 items-center">
+                <div class="flex gap-4 flex-col items-center">
+                  <img
+                    src="./image.jpg"
+                    onerror="this.onerror=null;this.src='https://lh3.googleusercontent.com/aida-public/AB6AXuDFM8P3aaJhXhVRcw88id8o8JkNHhwat8qHYVe5L_MwpuvZiPEsJKWrLeSGiBESh77PyNT39Xpzzbl8xlnajL3YvNuL0YnBcXqI3-DGmE5vWPDA-V_8ywsuJgBK15p6Yyr1IVuEi1z2i0MSyL4mXTcdDwDcr11JLcd9h7UcbbPuzqM8H48_3l0IsSEfFSVcELpgQzEMfC0d-MiTJtJQFNCI5SnwfZ5k4VcWebgSamYtULor0Pf2J6gdkJvwIicVl0dXi1dKkG66oSI';"
+                    alt="Profile Image"
+                    class="bg-center bg-no-repeat aspect-square bg-cover rounded-full min-h-32 w-32"
+                  />
+                  <div class="flex flex-col items-center justify-center justify-center gap-2">
+                    <p id = "resume-holder" class="text-white text-[22px] font-bold leading-tight tracking-[-0.015em] text-center">Hi</p>
+                    <div class="flex flex-row gap-2">
+                      <p id = "job-title" class="text-[#b1a6b5] text-base font-normal leading-normal text-center"></p>
+                      <p class="text-[#b1a6b5] text-base font-normal leading-normal text-center">|</p>
+                      <p id = "location" class="text-[#b1a6b5] text-base font-normal leading-normal text-center"></p>
+                    </div>
+                    <p id = "summary" class="text-[#b1a6b5] text-base font-normal leading-normal text-center"></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <h2 class="text-white text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">Skills</h2>
+            <div id = "skills" class="grid grid-cols-[repeat(auto-fit,minmax(158px,1fr))] gap-3 p-4"></div>
+            
+            <h2 class="text-white text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">Experience</h2>
+            <div id = "experience" class = "grid grid-cols-[40px_1fr] gap-x-2 px-4"></div>
+              
+            <h2 class="text-white text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">Education</h2>
+            <div id="education" class="w-full max-w-3xl px-5"></div>
+            
+            <h2 class="text-white text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">Projects</h2>
+            <div id = "projects" class="grid grid-cols-[repeat(auto-fit,minmax(158px,1fr))] gap-3 p-4"></div>
+
+            <h2 class="text-white text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">Certifications</h2>
+            <div id= "certifications" class="grid grid-cols-[repeat(auto-fit,minmax(158px,1fr))] gap-3 p-4"></div>
+          </div>          
+        </div>
+
+        <div class="flex flex-col items-center text-sm gap-1 text-[#b1a6b5] bg-[#1a171c] px-10 py-4 border-t border-solid border-t-[#38313a]">
+          <p id = "trade-mark" class="text-xs text-[#8f8a91] mt-2"></p>
+          <div class="flex items-center gap-1">
+            <span class="flex items-center gap-1">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 256 256">
+                <path d="M224,48H32A16,16,0,0,0,16,64V192a16,16,0,0,0,16,16H224a16,16,0,0,0,16-16V64A16,16,0,0,0,224,48ZM209.59,64,128,125.72,46.41,64ZM32,192V72.13l94.54,71.32a8,8,0,0,0,9,0L224,72.13V192Z"></path>
+              </svg>
+              <span id = "email" class="inline-block"></span>
+            </span> | 
+            
+            <span class="flex items-center gap-1">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 256 256">
+                <path d="M221.94,158.06a15.89,15.89,0,0,0-22.62,0l-27.12,27.12a128.33,128.33,0,0,1-80.6-80.6L119.7,77.47a15.89,15.89,0,0,0,0-22.62L97.38,32.62a16,16,0,0,0-22.64,0L56.28,51.09C43.37,63.9,36.17,82.3,37.57,101.26A170.66,170.66,0,0,0,154.74,218.43c19,.4,37.36-5.8,50.17-18.71l18.47-18.47A16,16,0,0,0,221.94,158.06Z"></path>
+              </svg>
+              <span id = "phone" class="inline-block"></span>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="render.js" defer type="module"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/file-saver@2.0.5/dist/FileSaver.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/docx@7.5.0/build/index.min.js"></script>
+  </body>
+</html>

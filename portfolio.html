@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Eric Salamba - Portfolio</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <link href="portfolio.css" rel="stylesheet">
+</head>
+<body class="transition-colors duration-500 bg-gray-50 text-black">
+  <header class="p-6 flex justify-between items-center bg-blue-600 text-white shadow-md">
+    <h1 class="text-2xl font-bold">Eric Salamba</h1>
+    <button onclick="toggleDarkMode()" class="bg-white text-blue-600 px-3 py-1 rounded">Toggle Theme</button>
+  </header>
+
+  <main class="max-w-5xl mx-auto p-6">
+    <section data-aos="fade-up" class="portfolio-card">
+      <h2 class="portfolio-title">About Me</h2>
+      <p>I'm a full stack developer with a passion for algorithms and elegant code. I specialize in building scalable applications and developing systems from scratch.</p>
+    </section>
+
+    <section data-aos="fade-up" class="portfolio-card">
+      <h2 class="portfolio-title">Tech Stack</h2>
+      <ul class="grid grid-cols-2 sm:grid-cols-3 gap-3 list-disc list-inside">
+        <li>Python</li>
+        <li>JavaScript / TypeScript</li>
+        <li>PHP</li>
+        <li>React.js</li>
+        <li>Node.js / Express</li>
+        <li>Flask / Django</li>
+        <li>MySQL / PostgreSQL / MongoDB</li>
+        <li>Docker</li>
+        <li>Git</li>
+      </ul>
+    </section>
+
+    <section data-aos="fade-up" class="portfolio-card">
+      <h2 class="portfolio-title">Projects</h2>
+      <div class="grid gap-6">
+        <div class="p-4 rounded shadow">
+          <h3 class="font-semibold text-lg">Project Management Web App</h3>
+          <p>Full-featured web app using React, Express, and MySQL with dashboard, auth, and task tracking.</p>
+        </div>
+        <div class="p-4 rounded shadow project-card">
+          <h3 class="font-semibold text-lg">E-commerce Door Store</h3>
+          <p>Online shopping site built with React and PHP (MySQL backend), featuring CMS and product filters.</p>
+        </div>
+        <div class="p-4 rounded shadow project-card">
+          <h3 class="font-semibold text-lg">Final Year Project</h3>
+          <p>Speech-to-text system with medical data extraction and document generation using Whisper + MongoDB.</p>
+        </div>
+        <div class="p-4 rounded shadow project-card">
+          <h3 class="font-semibold text-lg">Python Games</h3>
+          <p>Developed Chess, Checkers, and Ping Pong games with AI logic and sleek UI using Pygame.</p>
+        </div>
+      </div>
+    </section>
+
+    <section data-aos="fade-up" class="portfolio-card">
+      <h2 class="portfolio-title">Contact</h2>
+      <p>Kitengela, Kenya · <a href="mailto:ericsalamba@gmail.com" class="text-blue-600">ericsalamba@gmail.com</a> · +254 724 530 004</p>
+    </section>
+  </main>
+
+  <footer class="p-4 text-center text-sm text-gray-600">© 2025 Eric Salamba</footer>
+
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+  <script src="portfolio.js"></script>
+</body>
+</html>
