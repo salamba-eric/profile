@@ -194,10 +194,12 @@ function renderResume() {
   // --- Populate Projects ---
   if (data.projects && Array.isArray(data.projects)) {
     const projectsHtml = data.projects.map(proj => `
-      <div class="mb-3 p-4 rounded-lg shadow-sm bg-white">
-        <h3 class="font-bold text-purple-700">${proj.name}</h3>
-        <p>${proj.description}</p>
-        <small class="text-gray-600"><em>Technologies:</em> ${proj.technologies ? proj.technologies.join(', ') : 'N/A'}</small>
+      <div class="mb-3 p-4 rounded-lg shadow-sm bg-[#28232a] border border-[#4f4653]">
+      <h3 class="font-bold text-purple-700">${proj.name}</h3>
+      <p class="text-[#A0A0A0]">${proj.description}</p>
+      ${proj.technologies.map(tech => 
+        `<span class="inline-block bg-[#4f4653] text-white text-xs px-2 py-1 rounded mr-1 mt-1">${tech}</span>`
+      ).join('')}
       </div>
     `).join('');
     setHTML('projects', projectsHtml);
