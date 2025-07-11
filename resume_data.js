@@ -1,13 +1,12 @@
 export const resumeData = {
   "name": "Eric Salamba",
   "job title": "Computer Scientist",
-  "trade-mark": "© 2025 Eric Salamba. All rights reserved.",
   "contact": {
     "email": "ericsalamba@gmail.com",
     "phone": "+254 724 530 004"
   },
   "social": {
-    "linkedin": "",
+    "linkedIn": "",
     "github": ""
   },
   "location": {
@@ -96,3 +95,5 @@ export const resumeData = {
     }
   ]
 }
+
+resumeData["trade-mark"] = `© 2025 ${resumeData["name"]}. All rights reserved.`

@@ -1,0 +1,257 @@
+<html>
+  <head>
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="" />
+    <link
+      rel="stylesheet"
+      as="style"
+      onload="this.rel='stylesheet'"
+      href="https://fonts.googleapis.com/css2?display=swap&amp;family=Manrope%3Awght%40400%3B500%3B700%3B800&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900"
+    />
+
+    <title> Build Your Own Resume </title>
+    <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
+
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="new_resume.css" rel="stylesheet">
+    <script src="new_resume.js"></script>
+  </head>
+  <body>
+    <div class="relative flex size-full min-h-screen flex-col bg-[#101923] dark group/design-root overflow-x-hidden" style='font-family: Manrope, "Noto Sans", sans-serif;'>
+      <div class="layout-container flex h-full grow flex-col">
+        <header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#223449] px-10 py-3">
+          <div class="flex items-center gap-4 text-white">
+            <div class="size-4">
+              <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M24 4C25.7818 14.2173 33.7827 22.2182 44 24C33.7827 25.7818 25.7818 33.7827 24 44C22.2182 33.7827 14.2173 25.7818 4 24C14.2173 22.2182 22.2182 14.2173 24 4Z"
+                  fill="currentColor"
+                ></path>
+              </svg>
+            </div>
+            <h2 class="text-white text-lg font-bold leading-tight tracking-[-0.015em]">Resume Builder</h2>
+          </div>
+            <button
+              id="refresh"
+              class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-[#0c77f2] text-white text-sm font-bold leading-normal tracking-[0.015em]"
+            >
+              <span class="truncate">Discard Resume</span>
+            </button>
+            <script>
+              document.getElementById("refresh").addEventListener("click", function() {
+                window.location.reload();
+              });
+            </script>
+          </div>
+        </header>
+        <div class="px-40 flex flex-1 justify-center py-5">
+          <div class="items-center layout-content-container flex flex-col py-5 w-1/2 flex-1">
+            <div class="flex flex-wrap justify-between gap-3 p-4">
+            <p class="text-white tracking-light text-[32px] font-bold leading-tight min-w-72">Create a Resume</p></div>
+            <div class="px-4 py-3 w-full">
+                <label class="grid grid-cols-[0.4fr_2fr] gap-2 items-start">
+                <p class="text-white p-4 text-base font-medium leading-normal pb-2">Name</p>
+                <input
+                  id="name"
+                  placeholder="Enter your full name"
+                  class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-white focus:outline-0 focus:ring-0 border-none bg-[#223449] focus:border-none h-14 placeholder:text-[#90abcb] p-4 text-base font-normal leading-normal"
+                  value=""
+                />
+              </label>
+            </div>
+            <div class="gap-4 px-4 py-3 w-full">
+              <label class="grid grid-cols-[0.4fr_2fr] gap-2 items-start">
+                <p class="text-white text-base p-4 text-base font-medium leading-normal pb-2">Email</p>
+                <input
+                  id="email"
+                  placeholder="Enter your email"
+                  class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-white focus:outline-0 focus:ring-0 border-none bg-[#223449] focus:border-none h-14 placeholder:text-[#90abcb] p-4 text-base font-normal leading-normal"
+                  value=""
+                />
+              </label>
+            </div>
+            <div class="gap-4 px-4 py-3 w-full">
+              <label class="grid grid-cols-[0.4fr_2fr] gap-2 items-start">
+                <p class="text-white text-base p-4 text-base font-medium leading-normal pb-2">Phone</p>
+                <input
+                  id="phone"
+                  placeholder="Enter your phone number"
+                  class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-white focus:outline-0 focus:ring-0 border-none bg-[#223449] focus:border-none h-14 placeholder:text-[#90abcb] p-4 text-base font-normal leading-normal"
+                  value=""
+                />
+              </label>
+            </div>
+            <div class="gap-4 px-4 py-3 w-full">
+              <label class="grid grid-cols-[0.4fr_2fr] gap-2 items-start">
+                <p class="text-white text-base p-4 text-base font-medium leading-normal pb-2">Location</p>
+                <div class="flex flex-row gap-2">
+                  <input
+                    id="country"
+                    placeholder="Enter your country"
+                    class="form-input flex w-1/2 min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-white focus:outline-0 focus:ring-0 border-none bg-[#223449] focus:border-none h-14 placeholder:text-[#90abcb] p-4 text-base font-normal leading-normal"
+                    value=""
+                  />
+                  <input
+                    id="city"
+                    placeholder="Enter your city/state/region"
+                    class="form-input flex w-1/2 min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-white focus:outline-0 focus:ring-0 border-none bg-[#223449] focus:border-none h-14 placeholder:text-[#90abcb] p-4 text-base font-normal leading-normal"
+                    value=""
+                  />
+                </div>
+              </label>
+            </div>
+            <div class="gap-4 px-4 py-3 w-full">
+              <label class="grid grid-cols-[0.4fr_2fr] gap-2 items-start">
+                <p class="text-white text-base p-4 text-base font-medium leading-normal pb-2">LinkedIn</p>
+                <input
+                  id="linkedIn"
+                  placeholder="Link to your LinkedIn"
+                  class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-white focus:outline-0 focus:ring-0 border-none bg-[#223449] focus:border-none h-14 placeholder:text-[#90abcb] p-4 text-base font-normal leading-normal"
+                  value=""
+                />
+              </label>
+            </div>
+            <div class="gap-4 px-4 py-3 w-full">
+              <label class="grid grid-cols-[0.4fr_2fr] gap-2 items-start">
+                <p class="text-white text-base p-4 text-base font-medium leading-normal pb-2">Github</p>
+                <input
+                  id="github"
+                  placeholder="Link to your Github"
+                  class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-white focus:outline-0 focus:ring-0 border-none bg-[#223449] focus:border-none h-14 placeholder:text-[#90abcb] p-4 text-base font-normal leading-normal"
+                  value=""
+                />
+              </label>
+            </div>
+            <div class="px-4 py-3 w-full">
+              <label class="grid grid-cols-[0.4fr_2fr] gap-2 items-start">
+                <p class="text-white p-4 text-base font-medium leading-normal pb-2">Title</p>
+                <input
+                id="job_title"
+                class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-white focus:outline-0 focus:ring-0 border-none bg-[#223449] focus:border-none h-14 placeholder:text-[#90abcb] p-4 text-base font-normal leading-normal"
+                value=""
+                />
+                <script>
+                  const placeholders = [
+                    'Software Engineer', 'UN Representative', 'Fullstack Developer', 'Doctor'
+                  ];
+                  let currentIndex = 1;
+                  const jobTitleInput = document.getElementById('job_title');
+
+                  function updatePlaceholder() {
+                    jobTitleInput.placeholder = `Enter your job title - ${placeholders[currentIndex]}`;
+                    currentIndex = (currentIndex + 1) % placeholders.length;
+                  }
+
+                  setInterval(updatePlaceholder, 3000); // Change every 3 seconds
+                </script>
+              </label>
+            </div>
+            <div class="gap-4 px-4 py-3 w-full">
+              <label class="grid grid-cols-[0.4fr_2fr] gap-2 items-start">
+                <p class="text-white text-base p-4 text-base font-medium leading-normal pb-2">Profile Image</p>
+                <input
+                  id="image"
+                  placeholder="Enter your preferred profile image"
+                  type="file"
+                  accept="image/*"
+                  class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-white focus:outline-0 focus:ring-0 border-none bg-[#223449] focus:border-none h-14 placeholder:text-[#90abcb] p-4 text-base font-normal leading-normal"
+                  value=""
+                />
+            </label>
+          </div>
+            <div class="flex flex-col items-center justify-center py-2 px-5 w-full">
+              <label class="flex flex-col items-center items-center gap-2 w-full">
+                <p class="text-white text-base font-medium leading-normal pb-2">Summary</p>
+                <textarea
+                  id="summary"
+                  placeholder="Write a brief summary about yourself"
+                  class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-white focus:outline-0 focus:ring-0 border-none bg-[#223449] focus:border-none min-h-36 placeholder:text-[#90abcb] p-4 text-base font-normal leading-normal"
+                ></textarea>
+              </label>
+            </div>
+
+            <h3 class="text-white text-lg font-bold leading-tight tracking-[-0.015em] px-4 pb-2 pt-4">Projects</h3>
+            <div class="flex px-4 py-3">
+              <!-- From Uiverse.io by andrew-demchenk0 --> 
+                <button id="add_project_button" type="button" class="button">
+                    <span class="button__text">Add Project</span>
+                    <span class="button__icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 24 24" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" stroke="currentColor" height="24" fill="none" class="svg"><line y2="19" y1="5" x2="12" x1="12"></line><line y2="12" y1="12" x2="19" x1="5"></line></svg></span>
+                </button>
+            </div>
+            <div id="projects" class="w-full"></div>
+
+            <h3 class="text-white text-lg font-bold leading-tight tracking-[-0.015em] px-4 pb-2 pt-4">Experience</h3>
+            <div class="flex px-4 py-3">
+              <!-- From Uiverse.io by andrew-demchenk0 --> 
+              <button id="add_experience_button" type="button" class="button">
+                <span class="button__text">Add Experience</span>
+                <span class="button__icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 24 24" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" stroke="currentColor" height="24" fill="none" class="svg"><line y2="19" y1="5" x2="12" x1="12"></line><line y2="12" y1="12" x2="19" x1="5"></line></svg></span>
+            </button>
+            </div>
+            <div id="experiences" class="w-full"></div>
+
+            <h3 class="text-white text-lg font-bold leading-tight tracking-[-0.015em] px-4 pb-2 pt-4">Education</h3>
+            <div class="flex px-4 py-3">
+              <!-- From Uiverse.io by andrew-demchenk0 --> 
+              <button id="add_education_button" type="button" class="button">
+                <span class="button__text">Add Education</span>
+                <span class="button__icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 24 24" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" stroke="currentColor" height="24" fill="none" class="svg"><line y2="19" y1="5" x2="12" x1="12"></line><line y2="12" y1="12" x2="19" x1="5"></line></svg></span>
+            </button>
+            </div>
+            <div id="educations" class="w-full"></div>
+
+            <h3 class="text-white text-lg font-bold leading-tight tracking-[-0.015em] px-4 pb-2 pt-4">Certification</h3>
+            <div class="flex px-4 py-3">
+              <!-- From Uiverse.io by andrew-demchenk0 --> 
+              <button id="add_certification_button" type="button" class="button">
+                <span class="button__text">Add Certification</span>
+                <span class="button__icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 24 24" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" stroke="currentColor" height="24" fill="none" class="svg"><line y2="19" y1="5" x2="12" x1="12"></line><line y2="12" y1="12" x2="19" x1="5"></line></svg></span>
+            </button>
+            </div>
+            <div id="certifications" class="w-full"></div>
+
+            <h3 class="text-white text-lg font-bold leading-tight tracking-[-0.015em] px-4 pb-2 pt-4">Skills</h3>
+            <div class="flex px-4 py-3">
+              <!-- From Uiverse.io by andrew-demchenk0 --> 
+              <button id="add_skill_button" type="button" class="button">
+                <span class="button__text">Add Skill</span>
+                <span class="button__icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 24 24" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" stroke="currentColor" height="24" fill="none" class="svg"><line y2="19" y1="5" x2="12" x1="12"></line><line y2="12" y1="12" x2="19" x1="5"></line></svg></span>
+            </button>
+            </div>
+            <div id="skills" class="w-full"></div>
+
+            <h3 class="text-white text-lg font-bold leading-tight tracking-[-0.015em] px-4 pb-2 pt-4">Resume Template</h3>
+            <div class="border flex flex-row items-center rounded-lg p-3 w-3/4">
+              <label id="previous_template" class="flex items-center justify-center text-white">
+                <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                  <path fill-rule="evenodd" d="M13.729 5.575c1.304-1.074 3.27-.146 3.27 1.544v9.762c0 1.69-1.966 2.618-3.27 1.544l-5.927-4.881a2 2 0 0 1 0-3.088l5.927-4.88Z" clip-rule="evenodd"/>
+                </svg>                              
+              </label>
+              <div id="templates" class="flex border-solid-1 p-3 items-center w-full"></div>
+              <label id="next_template" class="flex items-center justify-center text-white">
+                <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                  <path fill-rule="evenodd" d="M10.271 5.575C8.967 4.501 7 5.43 7 7.12v9.762c0 1.69 1.967 2.618 3.271 1.544l5.927-4.881a2 2 0 0 0 0-3.088l-5.927-4.88Z" clip-rule="evenodd"/>
+                </svg>                                             
+              </label>
+            </div>
+            <div class="flex justify-stretch w-full p-10">
+              <div class="flex flex-1 gap-3 flex-wrap px-4 py-3 justify-between">
+                <button
+                  id="generate_button"
+                  class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-[#0c77f2] text-white text-sm font-bold leading-normal tracking-[0.015em]"
+                >
+                  <span class="truncate">Generate Resume</span>
+                </button>
+                <button
+                  id="ai_fill_button"
+                  class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-[#223449] text-white text-sm font-bold leading-normal tracking-[0.015em]"
+                >
+                  <span class="truncate">Fill in using AI</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

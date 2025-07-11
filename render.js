@@ -1,4 +1,13 @@
+let useCustom = document.referrer.split('/')[document.referrer.split('/').length - 1] == "new_resume.html";
+console.log(document.referrer.split('/')[document.referrer.split('/').length - 1])
+
+let fillData;
 import { resumeData } from './resume_data.js';
+
+if(useCustom){
+  fillData = JSON.parse(sessionStorage.getItem("userData"));
+} else {fillData = resumeData}
+
 
 /**
  * Utility function to safely set the text content of an HTML element by its ID.
@@ -75,10 +84,10 @@ function createList(group, items) {
  * Main function to render resume data to the DOM.
  */
 function renderResume() {
-  const data = resumeData; // Use the imported resumeData object
+  const data = fillData; // Use the imported fillData object
 
   // --- Dynamic Title Update (Browser Tab Title) ---
-  // The 'name' property from resumeData is used to set the document.title
+  // The 'name' property from fillData is used to set the document.title
   if (data.name) {
     document.title = `${data.name}'s Resume`; // Example: "Eric Salamba's Resume"
   } else {
@@ -214,12 +223,12 @@ function renderResume() {
   }
 
   // Handle social links dynamically if needed, e.g., for icons or direct links
-  const linkedinLink = document.getElementById('linkedin-link');
-  if (linkedinLink && data.social && data.social.linkedin) {
-    linkedinLink.href = data.social.linkedin;
-    linkedinLink.style.display = 'inline'; // Make visible if data exists
-  } else if (linkedinLink) {
-    linkedinLink.style.display = 'none'; // Hide if no data
+  const linkedInLink = document.getElementById('linkedin-link');
+  if (linkedInLink && data.social && data.social["linkedIn"]) {
+    linkedInLink.href = data.social["linkedIn"];
+    linkedInLink.style.display = 'inline'; // Make visible if data exists
+  } else if (linkedInLink) {
+    linkedInLink.style.display = 'none'; // Hide if no data
   }
 
   const githubLink = document.getElementById('github-link');
