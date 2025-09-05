@@ -1,58 +1,10 @@
 [
   {
-    "name": "Medical Transcriber",
-    "description": "Audio-to-text transcription for clinical use, with entity extraction.",
-    "tools": ["Whisper", "MongoDB", "Python"],
-    "category": "ai_medical",
-    "image": "https://via.placeholder.com/300x200?text=Transcriber",
-    "url": "https://github.com/salamba-eric/medical-transcriber"
-  },
-  {
-    "name": "Shopping Site",
-    "description": "E-commerce app with admin CMS and category filters.",
-    "tools": ["React", "PHP", "MySQL"],
-    "category": "web_commerce",
-    "image": "https://via.placeholder.com/300x200?text=Shop",
-    "url": "https://github.com/salamba-eric/door-shop"
-  },
-  {
-    "name": "Ping Pong Game",
-    "description": "Classic Pong game recreated in Python using Pygame.",
-    "tools": ["Python", "Pygame"],
-    "category": "games",
-    "image": "https://via.placeholder.com/300x200?text=Pong",
-    "url": "https://github.com/salamba-eric/ping-pong"
-  },
-    {
-    "name": "Pong Game",
-    "description": "Classic Pong game recreated in Python using Pygame.",
-    "tools": ["Python", "Pygame"],
-    "category": "games",
-    "image": "https://via.placeholder.com/300x200?text=Pong",
-    "url": "https://github.com/salamba-eric/ping-pong"
-  },
-    {
-    "name": "Ping Game",
-    "description": "Classic Pong game recreated in Python using Pygame.",
-    "tools": ["Python", "Pygame"],
-    "category": "games",
-    "image": "https://via.placeholder.com/300x200?text=Pong",
-    "url": "https://github.com/salamba-eric/ping-pong"
-  },
-    {
-    "name": "Ping Pong Game",
-    "description": "Classic Pong game recreated in Python using Pygame.",
-    "tools": ["Python", "Pygame"],
-    "category": "games",
-    "image": "https://via.placeholder.com/300x200?text=Pong",
-    "url": "https://github.com/salamba-eric/ping-pong"
-  },
-  {
-    "name": "Portfolio Website",
-    "description": "Personal portfolio showcasing projects and skills.",
-    "tools": ["React", "Tailwind CSS"],
-    "category": "web_portfolio",
-    "image": "https://via.placeholder.com/300x200?text=Portfolio",
-    "url": ""
-}
+    "name": "Checkers Game",
+    "description": "A web-based checkers game where users can play against an alpha-beta AI opponent.",
+    "tools": ["JavaScript", "HTML", "CSS", "Python (Flask)"],
+    "category": "Web Development (Game AI)",
+    "image": "https://github.com/salamba-eric/checkers/raw/main/preview.png",
+    "url": "https://github.com/salamba-eric/checkers"
+  }
 ]

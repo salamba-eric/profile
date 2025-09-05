@@ -94,12 +94,19 @@
             <div class="flex p-4 @container">
               <div class="flex w-full flex-col gap-4 items-center">
                 <div class="flex gap-4 flex-col items-center">
-                  <img
-                    src="./image.jpg"
-                    onerror="this.onerror=null;this.src='https://lh3.googleusercontent.com/aida-public/AB6AXuDFM8P3aaJhXhVRcw88id8o8JkNHhwat8qHYVe5L_MwpuvZiPEsJKWrLeSGiBESh77PyNT39Xpzzbl8xlnajL3YvNuL0YnBcXqI3-DGmE5vWPDA-V_8ywsuJgBK15p6Yyr1IVuEi1z2i0MSyL4mXTcdDwDcr11JLcd9h7UcbbPuzqM8H48_3l0IsSEfFSVcELpgQzEMfC0d-MiTJtJQFNCI5SnwfZ5k4VcWebgSamYtULor0Pf2J6gdkJvwIicVl0dXi1dKkG66oSI';"
-                    alt="Profile Image"
-                    class="bg-center bg-no-repeat aspect-square bg-cover rounded-full min-h-32 w-32"
-                  />
+                  <div class="relative min-h-32 w-32">
+                    <img
+                      src="./image.jpg"
+                      onerror="
+                        this.onerror=null;
+                        this.src='https://lh3.googleusercontent.com/aida-public/AB6AXuDFM8P3aaJhXhVRcw88id8o8JkNHhwat8qHYVe5L_MwpuvZiPEsJKWrLeSGiBESh77PyNT39Xpzzbl8xlnajL3YvNuL0YnBcXqI3-DGmE5vWPDA-V_8ywsuJgBK15p6Yyr1IVuEi1z2i0MSyL4mXTcdDwDcr11JLcd9h7UcbbPuzqM8H48_3l0IsSEfFSVcELpgQzEMfC0d-MiTJtJQFNCI5SnwfZ5k4VcWebgSamYtULor0Pf2J6gdkJvwIicVl0dXi1dKkG66oSI';
+                        this.class='bg-center bg-no-repeat aspect-square bg-cover rounded-full min-h-32 w-32';
+                        "
+                      alt="Profile Image"
+                      class="bg-no-repeat aspect-[1/1] rounded-full min-h-32 w-32 object-cover object-[50%_50%]"
+                      style="object-position: 50% 50%;"
+                    />
+                  </div>
                   <div class="flex flex-col items-center justify-center justify-center gap-2">
                     <p id = "resume-holder" class="text-white text-[22px] font-bold leading-tight tracking-[-0.015em] text-center">Hi</p>
                     <div class="flex flex-row gap-2">
