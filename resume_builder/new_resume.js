@@ -7,9 +7,11 @@ let imageNumber = 2; // Should always align with the number of files in image di
 let templateFocus = 1;
 
 let userData = {
+  "template": 0,
   "contact":{},
   "social":{},
   "location":{},
+  "hobbies & interests": [],
   "projects":[], "work experience": [], "education": [], "certifications": [], "skills": {}
 };
 
@@ -283,7 +285,7 @@ function createSkills(){
         </div>
         <div class="flex flex-col items-center justify-center py-2 px-5">
           <label class="flex flex-row items-center items-center gap-2 w-full">
-            <p class="text-white text-base font-medium leading-normal">Institution:</p>
+            <p class="text-white text-base font-medium leading-normal">Skill Name/Category:</p>
             <input
             id="skill-name-${skills}"
             placeholder="Skill Name/Category"
@@ -337,6 +339,159 @@ function removeArrayItemOnce(arr, value) {
     arr.splice(index, 1);
   }
   return arr;
+}
+
+function collectData (indices){
+
+  userData["template"] = templateFocus;
+  userData["name"] = document.getElementById("name").value;
+  userData["image"] = document.getElementById("image").value;
+  userData["job title"] = document.getElementById("job_title").value;
+  userData["contact"]["email"] = document.getElementById("email").value;
+  userData["contact"]["phone"] = document.getElementById("phone").value;
+  userData["social"]["linkedIn"] = document.getElementById("linkedIn").value;
+  userData["social"]["github"] = document.getElementById("github").value;
+  userData["location"]["country"] = document.getElementById("country").value
+  userData["location"]["city"] = document.getElementById("city").value
+  userData["description"] = document.getElementById("summary").value;
+  userData["hobbies & interests"] = document.getElementById("hobbies").value.split(',');
+
+  indices["projects"].forEach(p => {
+    userData["projects"].push({
+        "name": document.getElementById(`project-name-${p}`).value,
+        "description": document.getElementById(`project-description-${p}`).value,
+        "technologies": document.getElementById(`project-technologies-${p}`).value.split(',')
+    })
+  })
+
+  indices["work experience"].forEach(x => {
+      userData["work experience"].push({
+          "job title": document.getElementById(`experience-title-${x}`).value,
+          "company": document.getElementById(`experience-company-${x}`).value,
+          "location": `${document.getElementById(`experience-city-${x}`).value}, ${document.getElementById(`experience-country-${x}`).value}`,
+          "start date": document.getElementById(`experience-start-${x}`).value,
+          "end date": document.getElementById(`experience-end-${x}`).value,
+          "responsibilities": document.getElementById(`experience-roles-${x}`).value.split('\n')
+      })
+  })
+
+  indices["education"].forEach(e => {
+    userData["education"].push({
+        "institution": document.getElementById(`education-institution-${e}`).value,
+        "degree": document.getElementById(`education-degree-${e}`).value,
+        "graduation date": `${document.getElementById(`education-start-${e}`).value} - ${document.getElementById(`education-end-${e}`).value}`,
+        "honors": document.getElementById(`education-accomplishments-${e}`).value.split('\n')
+    })
+  })
+
+  indices["certifications"].forEach(c => {
+    userData["certifications"].push({
+      "name": document.getElementById(`certificate-name-${c}`).value,
+      "institution": document.getElementById(`certificate-institution-${c}`).value,
+      "date": `${document.getElementById(`certificate-start-${c}`).value} - ${document.getElementById(`certificate-end-${c}`).value}`,
+    })
+  })
+
+  indices["skills"].forEach(s => {
+    userData["skills"][document.getElementById(`skill-name-${s}`).value] = document.getElementById(`skill-examples-${s}`).value.split('\n')
+  })
+}
+
+function fillDataFromStorage(skillIndices){
+  const userData = JSON.parse(sessionStorage.getItem("userData") || "{}");
+
+  // Simple direct mapping: input ID -> userData property
+  const mapping = {
+    name: "name",
+    email: "contact.email",
+    phone: "contact.phone",
+    profile: "image",
+    linkedIn: "social.linkedIn",
+    github: "social.github",
+    country: "location.country",
+    city: "location.city",
+    job_title: "job title",
+    hobbies: "hobbies & interests",
+    summary: "description"
+  };
+
+  for (const [id, path] of Object.entries(mapping)) {
+    const el = document.getElementById(id);
+    if (el) {
+      let value = getValueByPath(userData, path);
+      if (Array.isArray(value)) value = value.join(", ");
+      if (value) el.value = value;
+    }
+  }
+
+  if(userData.skills){
+    let index = 1;
+    for (const [skill, examples] of Object.entries(userData.skills)) {
+      skillIndices.push(index)
+      addSkill(skillIndices)
+      const skill_name = document.getElementById(`skill-name-${index}`);
+      const skill_example = document.getElementById(`skill-examples-${index}`);
+      if (skill_name && skill_example) {
+        skill_name.value = skill;
+        if (Array.isArray(examples)) {
+          console.log(examples)
+          let value = examples.join(",");
+          console.log(value)
+          skill_example.value = value;
+        }
+      }
+      index ++;
+    }
+  }
+
+  function getValueByPath(obj, path) {
+    return path.split(".").reduce((o, k) => (o || {})[k], obj);
+  }
+}
+
+function addSkill(skillIndices){
+  const skillsDiv = document.getElementById('skills');
+  const newSkillsHtml = createSkills();
+  const tempDiv6 = document.createElement('div');
+  tempDiv6.innerHTML = newSkillsHtml.trim();
+  const newSkillsElement = tempDiv6.firstChild;
+  skillIndices.push(skills);
+  
+  skillsDiv.appendChild(newSkillsElement);
+
+  // Trigger reflow and then transition
+  requestAnimationFrame(() => {
+      newSkillsElement.style.height = `${newSkillsElement.scrollHeight}px`;
+      newSkillsElement.style.opacity = '1';
+  });
+
+  // After transition, remove inline styles and class
+  newSkillsElement.addEventListener('transitionend', function handler() {
+      newSkillsElement.style.height = ''; 
+      newSkillsElement.style.opacity = '';
+      newSkillsElement.classList.remove('collapsing-item');
+      newSkillsElement.removeEventListener('transitionend', handler);
+  });
+
+  const deleteButton = newSkillsElement.querySelector('.button--delete');
+  deleteButton.addEventListener('click', function() {
+      const skillId = this.dataset.skillId;
+      const skillToDelete = document.getElementById(`skill-${skillId}`);
+      if (skillToDelete) {
+        // Set height explicitly before transitioning to 0
+        skillToDelete.style.height = `${skillToDelete.scrollHeight}px`;
+        requestAnimationFrame(() => {
+            skillToDelete.style.height = '0';
+            skillToDelete.style.opacity = '0';
+        });
+
+        skillToDelete.addEventListener('transitionend', function handler() {
+            skillToDelete.remove();
+            skillToDelete.removeEventListener('transitionend', handler);
+        });
+        skillIndices = removeArrayItemOnce(skillIndices, skillId)
+      }
+    });
 }
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -534,51 +689,10 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     const addSkillsButton = document.getElementById('add_skill_button');
-    const skillsDiv = document.getElementById('skills');
     let skillIndices = []
 
     addSkillsButton.addEventListener('click', function() {
-        const newSkillsHtml = createSkills();
-        const tempDiv6 = document.createElement('div');
-        tempDiv6.innerHTML = newSkillsHtml.trim();
-        const newSkillsElement = tempDiv6.firstChild;
-        skillIndices.push(skills);
-        
-        skillsDiv.appendChild(newSkillsElement);
-
-        // Trigger reflow and then transition
-        requestAnimationFrame(() => {
-            newSkillsElement.style.height = `${newSkillsElement.scrollHeight}px`;
-            newSkillsElement.style.opacity = '1';
-        });
-
-        // After transition, remove inline styles and class
-        newSkillsElement.addEventListener('transitionend', function handler() {
-            newSkillsElement.style.height = ''; 
-            newSkillsElement.style.opacity = '';
-            newSkillsElement.classList.remove('collapsing-item');
-            newSkillsElement.removeEventListener('transitionend', handler);
-        });
-
-        const deleteButton = newSkillsElement.querySelector('.button--delete');
-        deleteButton.addEventListener('click', function() {
-            const skillId = this.dataset.skillId;
-            const skillToDelete = document.getElementById(`skill-${skillId}`);
-            if (skillToDelete) {
-              // Set height explicitly before transitioning to 0
-              skillToDelete.style.height = `${skillToDelete.scrollHeight}px`;
-              requestAnimationFrame(() => {
-                  skillToDelete.style.height = '0';
-                  skillToDelete.style.opacity = '0';
-              });
-
-              skillToDelete.addEventListener('transitionend', function handler() {
-                  skillToDelete.remove();
-                  skillToDelete.removeEventListener('transitionend', handler);
-              });
-              skillIndices = removeArrayItemOnce(skillIndices, skillId)
-            }
-        });
+      addSkill(skillIndices) 
     });
 
     const templatesDiv = document.getElementById('templates');
@@ -591,64 +705,104 @@ document.addEventListener('DOMContentLoaded', function() {
       if (imageNumber - 1 >= templateFocus ) {templateFocus ++}
       templatesDiv.innerHTML = renderTemplates();
     })
+
+    let indices = {
+      "projects": projectIndices,
+      "work experience": experienceIndces,
+      "education": educationIndices,
+      "certifications": certificationIndices,
+      "skills": skillIndices
+    }
     
     const generateButton = document.getElementById("generate_button");
-    generateButton.addEventListener('click', function(){
-        userData["name"] = document.getElementById("name").value;
-        userData["job title"] = document.getElementById("job_title").value;
-        userData["contact"]["email"] = document.getElementById("email").value;
-        userData["contact"]["phone"] = document.getElementById("phone").value;
-        userData["social"]["linkedIn"] = document.getElementById("linkedIn").value;
-        userData["social"]["github"] = document.getElementById("github").value;
-        userData["location"]["country"] = document.getElementById("country").value
-        userData["location"]["city"] = document.getElementById("city").value
-        userData["description"] = document.getElementById("summary").value;
+    const generateWithAi = document.getElementById("ai_fill_button");
 
-        projectIndices.forEach(p => {
-          userData["projects"].push({
-              "name": document.getElementById(`project-name-${p}`).value,
-              "description": document.getElementById(`project-description-${p}`).value,
-              "technologies": document.getElementById(`project-technologies-${p}`).value.split(',')
-          })
-        })
-
-        experienceIndces.forEach(x => {
-            userData["work experience"].push({
-                "job title": document.getElementById(`experience-title-${x}`).value,
-                "company": document.getElementById(`experience-company-${x}`).value,
-                "location": `${document.getElementById(`experience-city-${x}`).value}, ${document.getElementById(`experience-country-${x}`).value}`,
-                "start date": document.getElementById(`experience-start-${x}`).value,
-                "end date": document.getElementById(`experience-end-${x}`).value,
-                "responsibilities": document.getElementById(`experience-roles-${x}`).value.split('\n')
-            })
-        })
-
-        educationIndices.forEach(e => {
-          userData["education"].push({
-              "institution": document.getElementById(`education-institution-${e}`).value,
-              "degree": document.getElementById(`education-degree-${e}`).value,
-              "graduation date": `${document.getElementById(`education-start-${e}`).value} - ${document.getElementById(`education-end-${e}`).value}`,
-              "honors": document.getElementById(`education-accomplishments-${e}`).value.split('\n')
-          })
-        })
-
-        certificationIndices.forEach(c => {
-          userData["certifications"].push({
-            "name": document.getElementById(`certificate-name-${c}`).value,
-            "institution": document.getElementById(`certificate-institution-${c}`).value,
-            "date": `${document.getElementById(`certificate-start-${c}`).value} - ${document.getElementById(`certificate-end-${c}`).value}`,
-          })
-        })
-
-        skillIndices.forEach(s => {
-          userData["skills"][document.getElementById(`skill-name-${s}`).value] = document.getElementById(`skill-examples-${s}`).value.split('\n')
-        })
-
-        sessionStorage.setItem('userData', JSON.stringify(userData));
-
-
-        setTimeout(() => {
-          window.location.href = 'resume_2.html';
-        }, 2000); // Wait for 1 second before redirecting
+    generateButton.addEventListener('click', function() {
+      collectData(indices);
+      sessionStorage.setItem('userData', JSON.stringify(userData));
+      setTimeout(() => {
+        window.location.href = 'resume_2.html';
+      }, 1000); // Wait for 1 second before redirecting
     })
+
+    function promptAI() {
+      console.log("loading...");
+      const api = sessionStorage.getItem('AI_API');
+    
+      if (!api) {
+        console.error("No API key found in sessionStorage");
+        return;
+      }
+    
+      sessionStorage.setItem('userData', JSON.stringify(userData));
+    
+      const prompt = `
+      Complete the following JSON object. 
+      Fill in specifically the skills, hobbies and summary (a description of the users traits and abilities based on the content already in the JSON)
+      Do not include any other information besides the JSON. ${JSON.stringify(userData)}
+      Return a full stringified json object in its correct format`;
+    
+      fetch("https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=" + api, {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({
+          contents: [
+            {
+              parts: [
+                { text: prompt }
+              ]
+            }
+          ]
+        })
+      })
+      .then(response => response.json())
+      .then(data => {
+        console.log(data);
+    
+        let generatedContent = data.candidates[0].content.parts[0].text;
+
+        generatedContent = generatedContent.trim();
+        if (generatedContent.startsWith("```")) {
+          generatedContent = generatedContent.replace(/^```[a-z]*\n?/i, '').replace(/```$/, '').trim();
+        }
+
+        console.log(generatedContent)
+    
+        try {
+          const completedUserData = JSON.parse(generatedContent);
+          sessionStorage.setItem('userData', JSON.stringify(completedUserData));
+          fillDataFromStorage(skillIndices);
+        } catch (e) {
+          console.error('Failed to parse Gemini response as JSON:', e);
+          alert('Failed to get a complete resume from AI. Please try again.');
+        }
+      })
+      .catch(error => {
+        console.error('Error calling Gemini API:', error);
+        alert('Error communicating with AI. Please check your API key and network connection.' + '\nMessage:' +error.message);
+      });
+    }
+    
+    generateWithAi.addEventListener('click', function() {
+      collectData(indices);
+    
+      const api_modal = document.getElementById("modal");
+      const close_modal = document.getElementById("set_api");
+
+    
+      if (!sessionStorage.getItem('AI_API')) {
+        console.log("No API found");
+        api_modal.style.display = "block";
+    
+        close_modal.addEventListener('click', function() {
+          sessionStorage.setItem('AI_API', document.getElementById("api_key").value);
+          api_modal.style.display = "none";
+          promptAI();
+        }, { once: true });
+    
+      } else {
+        promptAI();
+      }
+    });    
+
 });
