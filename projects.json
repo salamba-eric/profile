@@ -3,8 +3,16 @@
     "name": "Checkers Game",
     "description": "A web-based checkers game where users can play against an alpha-beta AI opponent.",
     "tools": ["JavaScript", "HTML", "CSS", "Python (Flask)"],
-    "category": "Web Development (Game AI)",
+    "category": "Web Development",
     "image": "https://github.com/salamba-eric/checkers/raw/main/preview.png",
     "url": "https://github.com/salamba-eric/checkers"
+  },
+  {
+    "name": "Resume Builder",
+    "description": "A web-based solution for creating qiuck and beautiful resumes",
+    "tools": ["JavaScript", "HTML", "CSS", "Tailwind"],
+    "category": "Web Development",
+    "image": "https://github.com/salamba-eric/resume_builder/blob/main/assets/input.png?raw=true",
+    "url": "https://github.com/salamba-eric/resume_builder"
   }
 ]
