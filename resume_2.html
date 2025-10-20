@@ -23,7 +23,7 @@
                 <path fill-rule="evenodd" clip-rule="evenodd" d="M24 4H42V17.3333V30.6667H24V44H6V30.6667V17.3333H24V4Z" fill="currentColor"></path>
               </svg>
             </div>
-            <h2 id="name" class="text-white text-lg font-bold leading-tight tracking-[-0.015em]">Anonymous</h2>
+            <h2 id="name" class="text-white text-lg font-bold leading-tight tracking-[-0.015em]"> salamba's </h2>
           </div>
             <div class="flex gap-2 items-center">
               <div class="relative inline-block">
@@ -72,7 +72,7 @@
                   window.downloadDocx = function () {
                     const link = document.createElement("a");
                     link.href = "Resume.docx"; // update this path if needed
-                    link.download = "Clio_Resume.docx";
+                    link.download = resumeData["name"] + "_Resume.docx";
                     document.body.appendChild(link);
                     link.click();
                     document.body.removeChild(link);

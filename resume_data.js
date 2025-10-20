@@ -15,7 +15,7 @@ export const resumeData = {
     "city": "Kitengela"
   },
   "description": "I am a Computer Scientist and aspiring Full-Stack Developer/Data Analyst with over 5 years of practical development experience across Python, JavaScript, and PHP, proficient in crafting web, desktop, and data analysis solutions. My greatest strength is self-motivation, enabling me to see projects through to completion, even when facing challenges. I have a talent for innovative problem-solving, as demonstrated by my work on an offline transcription bot. I'm passionate about designing efficient systems – a drive that led me to develop an AI-assisted resume web app aimed at simplifying professional document creation. I value creating impactful and streamlined technological solutions.",
-  "description 2": "I am a Full-Stack Developer with 5 years of experience in Python and 3 years in JavaScript, skilled in building robust web and desktop applications, with foundational expertise in data analysis. My greatest strength is self-motivation, which consistently drives me to complete projects on time, even under tight deadlines. I have a talent for learning quickly and tackling complex problems. I'm passionate about optimizing processes for efficiency, exemplified by my work on an AI-powered resume builder designed to streamline resume creation. I value innovative solutions that deliver tangible outcomes.",
+  "description_2": "I am a Full-Stack Developer with 5 years of experience in Python and 3 years in JavaScript, skilled in building robust web and desktop applications, with foundational expertise in data analysis. My greatest strength is self-motivation, which consistently drives me to complete projects on time, even under tight deadlines. I have a talent for learning quickly and tackling complex problems. I'm passionate about optimizing processes for efficiency, exemplified by my work on an AI-powered resume builder designed to streamline resume creation. I value innovative solutions that deliver tangible outcomes.",
   "skills": {
     "programming languages": ["Python", "JavaScript", "TypeScript", "SQL", "PHP"],
     "frameworks": ["React.js", "Node.js", "Express", "Flask", "Django"],
@@ -76,12 +76,26 @@ export const resumeData = {
     {
       "name": "Advanced Python",
       "issuing organization": "Institute of Software Technologies (IST), Nairobi",
-      "date": ""
+      "date": "2020",
+      "link": ""
     },
     {
       "name": "Azure Fundamentals (AZ-900)",
       "issuing organization": "Microsoft",
-      "date": ""
+      "date": "2023",
+      "link": "https://learn.microsoft.com/api/credentials/share/en-us/ericsalamba-8298/E1293F5F75A8137D?sharingId=1F48BC7703C18809"
+    },
+    {
+      "name": "Google project management",
+      "issuing organization": "Google",
+      "date": "2025",
+      "link": "assets/google_project_management_cert.pdf"
+    },
+    {
+      "name": "Battle of the tech stacks",
+      "issuing organization": "SecretStartups and The Tech Hut",
+      "date": "2025",
+      "link": "assets/secret_startupsXthe_tech_hut_cert.png"
     }
   ]
 }
