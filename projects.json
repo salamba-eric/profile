@@ -20,7 +20,7 @@
     "description": "A healthcare platform that connects patients with verified medical facilities through location-based services",
     "tools": ["Typescript", "React", "React Native", "Tailwind", "FastAPI", "Google maps api", "Vector Search"],
     "category": "Web Development",
-    "image": "/assets/medi_map_clinics_page.jpg",
+    "image": "https://github.com/salamba-eric/profile/blob/main/assets/medi_map_clinics_page.jpg",
     "url": "https://github.com/pkonsomu2020/MediMap-Care-Project"
   }
 ]
