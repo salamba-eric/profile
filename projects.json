@@ -14,5 +14,13 @@
     "category": "Web Development",
     "image": "https://github.com/salamba-eric/resume_builder/blob/main/assets/input.png?raw=true",
     "url": "https://github.com/salamba-eric/resume_builder"
+  },
+  {
+    "name": "MediMap-Care-Project",
+    "description": "A healthcare platform that connects patients with verified medical facilities through location-based services",
+    "tools": ["Typescript", "React", "React Native", "Tailwind", "FastAPI", "Google maps api", "Vector Search"],
+    "category": "Web Development",
+    "image": "/assets/medi_map_clinics_page.jpg",
+    "url": "https://github.com/pkonsomu2020/MediMap-Care-Project"
   }
 ]
