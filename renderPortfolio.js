@@ -2,88 +2,48 @@ const GITHUB_USERNAME = "salamba-eric";
 const API_BASE = `https://api.github.com/users/${GITHUB_USERNAME}/repos`;
 const projectsContainer = document.getElementById("projects-container");
 
-// Toggle dark/light theme
-const toggleBtn = document.getElementById("theme-toggle");
-toggleBtn.onclick = () => {
-  document.documentElement.classList.toggle("dark");
-  localStorage.theme = document.documentElement.classList.contains("dark") ? "dark" : "light";
-};
-
 function createSkeletonCard() {
-  return `<div class="animate-pulse bg-gray-200 dark:bg-[#1a1a1a] rounded p-4 w-full h-56"></div>`;
+  return `<div class="animate-pulse bg-gray-200 rounded p-4 w-full h-56"></div>`;
 }
 
 function createProjectCard({ name, description, tools, image, url }) {
   return `
-    <div class="bg-gray-100 dark:bg-[#1c1c1c] p-4 rounded shadow-md hover:shadow-lg transition flex flex-col">
-      <div class="relative mb-3 group rounded overflow-hidden">
+    <div class="bg-white p-5 rounded-lg shadow-md 
+                hover:shadow-lg hover:shadow-gray-300/50
+                transition-all duration-300 transform hover:scale-[1.01] flex flex-col h-full border border-gray-200">
+      
+      <div class="relative mb-4 group rounded-md overflow-hidden flex-shrink-0 bg-gray-50 p-2 shadow-sm">
         <img
           src="${image}"
           alt="${name}"
-          class="w-full h-40 object-cover rounded"
+          class="w-full h-44 object-cover rounded-sm transition duration-500 group-hover:scale-105"
           onerror="this.src='https://via.placeholder.com/300x200?text=${encodeURIComponent(name)}'"
-          onmousedown="(function(e){ e.preventDefault(); e.stopPropagation(); showImageModal(${JSON.stringify(image)}, ${JSON.stringify(name)}); })(event)"
-          onmouseup="hideImageModal()"
         />
-        <div class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-40 opacity-0 group-hover:opacity-100 transition pointer-events-none group-hover:pointer-events-auto">
-          <button
-            type="button"
-            class="pointer-events-auto bg-white dark:bg-[#111] text-gray-700 dark:text-white p-2 rounded-full shadow-sm hover:bg-gray-200 focus:outline-none"
-            aria-label="Expand image"
-            onmousedown="(function(e){ e.preventDefault(); e.stopPropagation(); showImageModal(${JSON.stringify(image)}, ${JSON.stringify(name)}); })(event)"
-            onmouseup="hideImageModal()"
-          >
-            <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' class='h-5 w-5'>
+        <div class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-0 group-hover:bg-opacity-40 transition-all duration-300 cursor-pointer"
+             onclick="showImageModal('${image.replace(/'/g, "\\'")}', '${name.replace(/'/g, "\\'")}')">
+          <div class="bg-white text-gray-700 p-3 rounded-full shadow-md 
+                      hover:bg-gray-100 transition transform scale-0 group-hover:scale-100 duration-300">
+            <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' class='h-6 w-6'>
               <path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M15 3h6v6M9 21H3v-6M21 21l-7-7M3 3l7 7'/>
             </svg>
-          </button>
+          </div>
         </div>
       </div>
-      <a href="${url}" target="_blank" rel="noopener noreferrer" class="block">
-        <h3 class="text-xl font-semibold text-[#2d2d2d] dark:text-white mb-1">${name}</h3>
-        <p class="text-sm text-gray-700 dark:text-[#b1a6b5] mb-2">${description}</p>
-        <div class="text-xs text-blue-500">${tools && tools.length ? tools.join(", ") : ""}</div>
-      </a>
-
-      <script>
-        (function(){
-          if (window._imageModalInitialized) return;
-          window._imageModalInitialized = true;
-
-          window.showImageModal = function(src, alt){
-            if (document.getElementById('image-modal')) return;
-            const modal = document.createElement('div');
-            modal.id = 'image-modal';
-            Object.assign(modal.style, {
-              position: 'fixed',
-              inset: '0',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              background: 'rgba(0,0,0,0.75)',
-              zIndex: 9999,
-              cursor: 'zoom-out'
-            });
-            modal.innerHTML = '<img src='+JSON.stringify(src)+' alt='+JSON.stringify(alt)+' style="max-width:90%; max-height:90%; box-shadow:0 10px 30px rgba(0,0,0,0.6); border-radius:8px;"/>';
-            document.body.appendChild(modal);
-            // remove on mouseup anywhere (ensures release hides modal)
-            // also allow click to remove
-            modal.addEventListener('mouseup', window.hideImageModal);
-            modal.addEventListener('click', window.hideImageModal);
-          };
-
-          window.hideImageModal = function(){
-            const m = document.getElementById('image-modal');
-            if (!m) return;
-            m.removeEventListener('mouseup', window.hideImageModal);
-            m.removeEventListener('click', window.hideImageModal);
-            m.parentNode && m.parentNode.removeChild(m);
-          };
-
-          // ensure mouseup anywhere hides modal (covers case where mouseup not on modal)
-          window.addEventListener('mouseup', function(){ window.hideImageModal(); });
-        })();
-      </script>
+      
+      <div class="flex-grow flex flex-col">
+        <h3 
+          class="text-xl font-semibold text-gray-800 mb-1 cursor-pointer 
+                 hover:text-blue-600 transition duration-150"
+          onclick="window.open('${url}', '_blank', 'noopener,noreferrer')"
+        >
+          ${name}
+        </h3>
+        <p class="text-sm text-gray-600 mb-3 flex-grow">${description}</p>
+        
+        <div class="flex flex-wrap gap-2 mt-2">
+          ${tools && tools.length ? tools.map(tool => `<span class="inline-flex items-center bg-gray-300 text-gray-700 rounded-full px-3 py-1 text-xs">${tool}</span>`).join("") : ""}
+        </div>
+      </div>
     </div>
   `;
 }
@@ -99,8 +59,8 @@ function renderSections(projects) {
   projectsContainer.innerHTML = Object.entries(grouped)
     .map(([category, items]) => {
       return `
-        <section>
-          <h2 class="text-2xl font-bold mb-4">${category}</h2>
+        <section class="mb-12">
+          <h2 class="text-2xl font-bold mb-6 text-gray-800">${category}</h2>
           <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             ${items.map(p => createProjectCard(p)).join("")}
           </div>
@@ -112,11 +72,14 @@ function renderSections(projects) {
 
 async function fetchPortfolioProjects() {
   try {
-    const res = await fetch(API_BASE);
-    const repos = await res.json();
-
+    // Show loading skeletons
     projectsContainer.innerHTML = '<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">' +
       Array(6).fill(createSkeletonCard()).join('') + '</div>';
+
+    const res = await fetch(API_BASE);
+    if (!res.ok) throw new Error(`GitHub API error: ${res.status}`);
+    
+    const repos = await res.json();
 
     const projects = [];
     for (const repo of repos) {
@@ -137,10 +100,20 @@ async function fetchPortfolioProjects() {
       }
     }
 
-    renderSections(projects);
+    if (projects.length === 0) {
+      projectsContainer.innerHTML = '<p class="text-center text-gray-500 py-8">No projects found with project_info.json files.</p>';
+    } else {
+      renderSections(projects);
+    }
   } catch (e) {
-    projectsContainer.innerHTML = `<p class="text-red-500">Failed to load projects. ${e.message}</p>`;
+    console.error('Failed to load projects:', e);
+    projectsContainer.innerHTML = `<p class="text-red-500 text-center py-8">Failed to load projects. ${e.message}</p>`;
   }
 }
 
-fetchPortfolioProjects();
+// Initialize when DOM is loaded
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', fetchPortfolioProjects);
+} else {
+  fetchPortfolioProjects();
+}

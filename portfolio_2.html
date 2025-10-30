@@ -8,10 +8,67 @@
       href="https://fonts.googleapis.com/css2?display=swap&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900&amp;family=Space+Grotesk%3Awght%40400%3B500%3B700"
     />
 
-    <title id= 'page-title'></title>
+    <title id='page-title'></title>
     <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
 
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <style>
+      #image-modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.9);
+        z-index: 9999;
+        align-items: center;
+        justify-content: center;
+      }
+      
+      #image-modal.show {
+        display: flex;
+      }
+      
+      .modal-content {
+        max-width: 90%;
+        max-height: 90%;
+        position: relative;
+      }
+      
+      .modal-close {
+        position: absolute;
+        top: -40px;
+        right: 0;
+        background: rgba(0, 0, 0, 0.7);
+        color: white;
+        border: none;
+        padding: 8px 12px;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+      
+      .modal-close:hover {
+        background: rgba(0, 0, 0, 0.9);
+      }
+
+      /* Loading spinner */
+      .spinner {
+        border: 2px solid #f3f3f3;
+        border-top: 2px solid #3d98f4;
+        border-radius: 50%;
+        width: 16px;
+        height: 16px;
+        animation: spin 1s linear infinite;
+        display: inline-block;
+        margin-right: 8px;
+      }
+
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+    </style>
   </head>
   <body>
     <div class="relative flex size-full min-h-screen flex-col bg-slate-50 group/design-root overflow-x-hidden" style='font-family: "Space Grotesk", "Noto Sans", sans-serif;'>
@@ -33,35 +90,40 @@
                 </defs>
               </svg>
             </div>
-            <h2 id= 'portfolio-title' class="text-[#0d141c] text-lg font-bold leading-tight tracking-[-0.015em]"></h2>
+            <h2 id='portfolio-title' class="text-[#0d141c] text-lg font-bold leading-tight tracking-[-0.015em]">Eric Salamba</h2>
           </div>
             <div class="flex gap-2">
               <button
                 class="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 bg-[#e7edf4] text-[#0d141c] gap-2 text-sm font-bold leading-normal tracking-[0.015em] min-w-0 px-2.5"
               >
                 <div class="text-[#0d141c]" data-icon="GithubLogo" data-size="20px" data-weight="regular">
+
+                <a href="https://github.com/salamba-eric">
                   <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="currentColor" viewBox="0 0 256 256">
                     <path
                       d="M208.31,75.68A59.78,59.78,0,0,0,202.93,28,8,8,0,0,0,196,24a59.75,59.75,0,0,0-48,24H124A59.75,59.75,0,0,0,76,24a8,8,0,0,0-6.93,4,59.78,59.78,0,0,0-5.38,47.68A58.14,58.14,0,0,0,56,104v8a56.06,56.06,0,0,0,48.44,55.47A39.8,39.8,0,0,0,96,192v8H72a24,24,0,0,1-24-24A40,40,0,0,0,8,136a8,8,0,0,0,0,16,24,24,0,0,1,24,24,40,40,0,0,0,40,40H96v16a8,8,0,0,0,16,0V192a24,24,0,0,1,48,0v40a8,8,0,0,0,16,0V192a39.8,39.8,0,0,0-8.44-24.53A56.06,56.06,0,0,0,216,112v-8A58.14,58.14,0,0,0,208.31,75.68ZM200,112a40,40,0,0,1-40,40H112a40,40,0,0,1-40-40v-8a41.74,41.74,0,0,1,6.9-22.48A8,8,0,0,0,80,73.83a43.81,43.81,0,0,1,.79-33.58,43.88,43.88,0,0,1,32.32,20.06A8,8,0,0,0,119.82,64h32.35a8,8,0,0,0,6.74-3.69,43.87,43.87,0,0,1,32.32-20.06A43.81,43.81,0,0,1,192,73.83a8.09,8.09,0,0,0,1,7.65A41.72,41.72,0,0,1,200,104Z"
                     ></path>
                   </svg>
+                </a>
                 </div>
               </button>
               <button
                 class="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 bg-[#e7edf4] text-[#0d141c] gap-2 text-sm font-bold leading-normal tracking-[0.015em] min-w-0 px-2.5"
               >
                 <div class="text-[#0d141c]" data-icon="LinkedinLogo" data-size="20px" data-weight="regular">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="currentColor" viewBox="0 0 256 256">
-                    <path
-                      d="M216,24H40A16,16,0,0,0,24,40V216a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V40A16,16,0,0,0,216,24Zm0,192H40V40H216V216ZM96,112v64a8,8,0,0,1-16,0V112a8,8,0,0,1,16,0Zm88,28v36a8,8,0,0,1-16,0V140a20,20,0,0,0-40,0v36a8,8,0,0,1-16,0V112a8,8,0,0,1,15.79-1.78A36,36,0,0,1,184,140ZM100,84A12,12,0,1,1,88,72,12,12,0,0,1,100,84Z"
-                    ></path>
-                  </svg>
+                  <a href="https://www.linkedin.com/in/eric-salamba-14869a277">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="currentColor" viewBox="0 0 256 256">
+                      <path
+                        d="M216,24H40A16,16,0,0,0,24,40V216a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V40A16,16,0,0,0,216,24Zm0,192H40V40H216V216ZM96,112v64a8,8,0,0,1-16,0V112a8,8,0,0,1,16,0Zm88,28v36a8,8,0,0,1-16,0V140a20,20,0,0,0-40,0v36a8,8,0,0,1-16,0V112a8,8,0,0,1,15.79-1.78A36,36,0,0,1,184,140ZM100,84A12,12,0,1,1,88,72,12,12,0,0,1,100,84Z"
+                      ></path>
+                    </svg>
+                  </a>
                 </div>
               </button>
             </div>
           </div>
         </header>
-        <div class="px-40 flex flex-1 justify-center py-5">
+        <div class="px-10 flex flex-1 justify-center py-5">
           <div class="layout-content-container flex flex-col max-w-[960px] flex-1">
             <div class="@container">
               <div class="@[480px]:p-4">
@@ -86,44 +148,61 @@
               <!-- Projects will be dynamically inserted here -->
             </div>
             
+            <!-- Image Modal -->
+            <div id="image-modal">
+              <div class="modal-content">
+                <img id="modal-image" src="" alt="" class="max-w-full max-h-full object-contain rounded-lg shadow-2xl">
+                <button class="modal-close" onclick="hideImageModal()">Close (ESC)</button>
+              </div>
+            </div>
+            
             <hr class="border-t border-gray-300 my-4">
-            <div style="margin-top: 50px;" class="w-1/2 bg-gray-300 mx-auto min-w-300 rounded-lg mb-10">
+            <div style="margin-top: 50px;" class="w-3/4 bg-gray-300 mx-auto rounded-lg mb-10">
               <h2 class="text-[#0d141c] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">Contact Me</h2>
+              <div id="form-message" class="hidden px-4 py-2 mx-4 mb-2 rounded text-center"></div>
               <div class = "align-center"></div>
                 <div class="flex max-w-[600px] flex-wrap gap-4 px-4 py-3">
                   <label class="flex flex-col min-w-40 flex-1">
                     <p class="text-[#0d141c] text-base font-medium leading-normal pb-2">Name</p>
                     <input
-                      placeholder="Your Name"
+                      id="contact-name"
+                      placeholder="Name"
                       class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#0d141c] focus:outline-0 focus:ring-0 border-none bg-[#e7edf4] focus:border-none h-14 placeholder:text-[#49739c] p-4 text-base font-normal leading-normal"
                       value=""
                     />
                   </label>
                 </div>
-                <div class="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3">
+                <div class="flex max-w-[600px] flex-wrap items-end gap-4 px-4 py-3">
                   <label class="flex flex-col min-w-40 flex-1">
                     <p class="text-[#0d141c] text-base font-medium leading-normal pb-2">Email</p>
                     <input
+                      id="contact-email"
+                      type="email"
                       placeholder="Your Email"
                       class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#0d141c] focus:outline-0 focus:ring-0 border-none bg-[#e7edf4] focus:border-none h-14 placeholder:text-[#49739c] p-4 text-base font-normal leading-normal"
                       value=""
                     />
                   </label>
                 </div>
-                <div class="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3">
+                <div class="flex max-w-[600px] flex-wrap items-end gap-4 px-4 py-3">
                   <label class="flex flex-col min-w-40 flex-1">
                     <p class="text-[#0d141c] text-base font-medium leading-normal pb-2">Message</p>
                     <textarea
+                      id="contact-message"
                       placeholder="Your Message"
                       class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#0d141c] focus:outline-0 focus:ring-0 border-none bg-[#e7edf4] focus:border-none min-h-36 placeholder:text-[#49739c] p-4 text-base font-normal leading-normal"
                     ></textarea>
                   </label>
                 </div>
-                <div class="flex px-4 py-3">
+                <div class="flex px-4 py-3 justify-center items-center">
                   <button
-                    class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-[#3d98f4] text-slate-50 text-sm font-bold leading-normal tracking-[0.015em]"
+                    id="send-button"
+                    style="justify-self: center; margin-bottom: 10px;"
+                    class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-[#3d98f4] text-slate-50 text-sm font-bold leading-normal tracking-[0.015em] hover:bg-[#2d88e4] transition duration-200"
+                    onclick="sendEmail()"
                   >
-                    <span class="">Send</span>
+                    <span id="send-text">Send</span>
+                    <div id="send-spinner" class="spinner hidden"></div>
                   </button>
                 </div>
                 
@@ -135,7 +214,7 @@
           <div class="flex max-w-[960px] flex-1 flex-col">
             <footer class="flex flex-col gap-6 px-5 py-10 text-center @container">
               <div class="flex flex-wrap justify-center gap-4">
-                <a href="#">
+                <a href="#portfolio-title">
                   <div class="text-[#49739c]" data-icon="GithubLogo" data-size="24px" data-weight="regular">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
                       <path
@@ -144,7 +223,7 @@
                     </svg>
                   </div>
                 </a>
-                <a href="#">
+                <a href="#portfolio-title">
                   <div class="text-[#49739c]" data-icon="LinkedinLogo" data-size="24px" data-weight="regular">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
                       <path
@@ -161,5 +240,132 @@
       </div>
     </div>
   </body>
-  <script src="fetch_data.js" defer type="module"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script type="text/javascript">
+    (function(){
+      emailjs.init("DCFjJvLmBlAbFG3S-");
+    })();
+  </script>
+  <script>
+    // Modal functions
+    function showImageModal(src, alt) {
+      const modal = document.getElementById('image-modal');
+      const modalImage = document.getElementById('modal-image');
+      
+      modalImage.src = src;
+      modalImage.alt = alt;
+      modal.classList.add('show');
+      document.body.style.overflow = 'hidden';
+      
+      // Add event listeners
+      modal.addEventListener('click', handleModalClick);
+      document.addEventListener('keydown', handleEscapeKey);
+    }
+
+    function hideImageModal() {
+      const modal = document.getElementById('image-modal');
+      modal.classList.remove('show');
+      document.body.style.overflow = '';
+      
+      // Remove event listeners
+      modal.removeEventListener('click', handleModalClick);
+      document.removeEventListener('keydown', handleEscapeKey);
+    }
+
+    function handleModalClick(e) {
+      if (e.target === document.getElementById('image-modal')) {
+        hideImageModal();
+      }
+    }
+
+    function handleEscapeKey(e) {
+      if (e.key === 'Escape') {
+        hideImageModal();
+      }
+    }
+
+    // Email functionality
+async function sendEmail() {
+  const name = document.getElementById('contact-name').value.trim();
+  const email = document.getElementById('contact-email').value.trim();
+  const message = document.getElementById('contact-message').value.trim();
+  const sendButton = document.getElementById('send-button');
+  const sendText = document.getElementById('send-text');
+  const sendSpinner = document.getElementById('send-spinner');
+  const formMessage = document.getElementById('form-message');
+
+  formMessage.className = 'hidden px-4 py-2 mx-4 mb-2 rounded text-center';
+
+  if (!name || !email || !message) {
+    showMessage('Please fill in all fields.', 'bg-red-100 text-red-700 border border-red-300');
+    return;
+  }
+
+  if (!isValidEmail(email)) {
+    showMessage('Please enter a valid email address.', 'bg-red-100 text-red-700 border border-red-300');
+    return;
+  }
+
+  // show loading state
+  sendButton.disabled = true;
+  sendText.textContent = '';
+  sendSpinner.classList.remove('hidden');
+
+  try {
+    const result = await emailjs.send(
+      "service_fjyorml",    
+      "template_26ses5q",
+      {
+        from_name: name,
+        from_email: email,
+        message: message
+      }
+    );
+
+    showMessage('Thank you! Your message has been sent successfully.', 'bg-green-100 text-green-700 border border-green-300');
+    resetForm();
+
+  } catch (error) {
+    console.error('Email send failed:', error);
+    showMessage('Oops! Something went wrong. Please try again later.', 'bg-red-100 text-red-700 border border-red-300');
+  } finally {
+    resetButton();
+  }
+}
+
+    function showMessage(text, className) {
+      const formMessage = document.getElementById('form-message');
+      formMessage.textContent = text;
+      formMessage.className = className + ' px-4 py-2 mx-4 mb-2 rounded text-center';
+    }
+
+    function resetForm() {
+      document.getElementById('contact-name').value = '';
+      document.getElementById('contact-email').value = '';
+      document.getElementById('contact-message').value = '';
+    }
+
+    function resetButton() {
+      const sendButton = document.getElementById('send-button');
+      const sendText = document.getElementById('send-text');
+      const sendSpinner = document.getElementById('send-spinner');
+      
+      sendButton.disabled = false;
+      sendText.textContent = 'Send';
+      sendSpinner.classList.add('hidden');
+    }
+
+    function isValidEmail(email) {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return emailRegex.test(email);
+    }
+
+    // Allow form submission with Enter key in message field
+    document.getElementById('contact-message').addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' && e.ctrlKey) {
+        sendEmail();
+      }
+    });
+  </script>
+  <script src="renderPortfolio.js" defer></script>
 </html>
